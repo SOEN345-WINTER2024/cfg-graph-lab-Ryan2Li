@@ -1,3 +1,71 @@
+## Lab 7 - Ryan Li - 40214839
+
+### Part 1 - Step 1
+![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/838a61c8-5e09-45ca-b6ec-3aa989152922)
+
+### Part 1 - Step 2
+TR = {{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19}, {20}, {21}, {22}, {23}}
+
+Test Paths = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18, 22, 23}, {1, 17, 19, 22, 23}, {1, 17, 20, 22, 23}, {1, 17, 21, 22, 23}}
+
+### Part 1 - Step 3
+TR = {{1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8}, {1, 9}, {1, 10}, {1, 11}, {1, 12}, {1, 13}, {1, 14}, {1, 15}, {1, 16}, {1, 17}, {17, 18}, {17, 19}, {17, 20}, {17, 21}, {18, 22}, {19, 22}, {20, 22}, {21, 22}, {22, 23}, {2, 23}, {3, 23}, {4, 23}, {5, 23}, {6, 23}, {7, 23}, {8, 23}, {9, 23}, {10, 23}, {11, 23}, {12, 23}, {13, 23}, {14, 23}, {15, 23}, {16, 23}}
+
+Test Paths = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18, 22, 23}, {1, 17, 19, 22, 23}, {1, 17, 20, 22, 23}, {1, 17, 21, 22, 23}}
+
+### Part 1 - Step 4
+TR = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18}, {1, 17, 19}, {1, 17, 20}, {1, 17, 21}, {17, 18, 22}, {17, 19, 22}, {17, 20, 22}, {17, 21, 22}, {18, 22, 23}, {19, 22, 23}, {20, 22, 23}, {21, 22, 23}}
+
+Test Paths = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18, 22, 23}, {1, 17, 19, 22, 23}, {1, 17, 20, 22, 23}, {1, 17, 21, 22, 23}}
+
+### Part 1 - Step 5
+![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/6df57e51-fa72-497e-aebd-5346bda8efbb)
+
+### Part 2 - Step 1
+``` kotlin
+override fun onTabChanged(tab: NavTab) {
+        if (tab == NavTab.EDITS) {
+            ImageRecommendationsEvent.logImpression("suggested_edit_dialog")
+            PatrollerExperienceEvent.logImpression("suggested_edits_dialog")
+        }
+        if (tab == NavTab.EXPLORE) {
+            binding.mainToolbarWordmark.visibility = View.VISIBLE
+            binding.mainToolbar.title = ""
+            controlNavTabInFragment = false
+        } else {
+            if (tab == NavTab.SEARCH && Prefs.showSearchTabTooltip) {
+                FeedbackUtil.showTooltip(this, fragment.binding.mainNavTabLayout.findViewById(NavTab.SEARCH.id), getString(R.string.search_tab_tooltip), aboveOrBelow = true, autoDismiss = false)
+                Prefs.showSearchTabTooltip = false
+            }
+            binding.mainToolbarWordmark.visibility = View.GONE
+            binding.mainToolbar.setTitle(tab.text)
+            controlNavTabInFragment = true
+        }
+        fragment.requestUpdateToolbarElevation()
+}
+```
+![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/762e827e-99a1-4ff8-b30f-2adffb1b85a5)
+
+### Part 2 - Step 2
+TR = {{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}}
+
+Test Paths = {{1, 2, 3, 4, 8}, {1, 3, 5, 6, 7, 8}}
+
+### Part 2 - Step 3
+TR = {{1, 2}, {1, 3}, {2, 3}, {3, 4}, {4, 8}, {3, 5}, {5, 6}, {5, 7}, {7, 8}}
+
+Test Paths = {{1, 2, 3, 4, 8}, {1, 3, 5, 6, 7, 8}, {1, 3, 5, 7, 8}}
+
+### Part 2 - Step 4
+TR = {{1, 2 ,3}, {1, 3, 4}, {1, 3 , 5}, {2, 3, 4}, {2, 3, 5}, {3, 4, 8}, {3, 5, 6}. {3, 5 ,7}, {5, 6, 7}, {5, 7, 8}, {6, 7, 8}}
+
+Test Paths = {{1, 2, 3, 4, 8}, {1, 3, 4, 8}, {1, 2, 3, 5, 6, 7, 8}, {1, 3, 5, 6, 7, 8}, {1, 3, 5, 7, 8}}
+
+### Part 2 - Step 5
+![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/61379d8d-415b-46b8-88c1-e9a2a48cf06f)
+
+---
+
 # Soot Tutorial
 [![Build Status](https://travis-ci.com/noidsirius/SootTutorial.svg?branch=master)](https://travis-ci.com/noidsirius/SootTutorial)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/noidsirius/SootTutorial)
@@ -103,72 +171,3 @@ This chapter gives you a brief overview o call graphs and PointsTo analysis in A
 |Title |Tutorial | Soot Code        | Example Input  |
 | :---: |:-------------: |:-------------:| :-----:|
 | | | | |
-
----
-
-## Lab 7 - Ryan Li
-
-### Part 1 - Step 1
-![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/838a61c8-5e09-45ca-b6ec-3aa989152922)
-
-### Part 1 - Step 2
-TR = {{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19}, {20}, {21}, {22}, {23}}
-
-Test Paths = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18, 22, 23}, {1, 17, 19, 22, 23}, {1, 17, 20, 22, 23}, {1, 17, 21, 22, 23}}
-
-### Part 1 - Step 3
-TR = {{1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8}, {1, 9}, {1, 10}, {1, 11}, {1, 12}, {1, 13}, {1, 14}, {1, 15}, {1, 16}, {1, 17}, {17, 18}, {17, 19}, {17, 20}, {17, 21}, {18, 22}, {19, 22}, {20, 22}, {21, 22}, {22, 23}, {2, 23}, {3, 23}, {4, 23}, {5, 23}, {6, 23}, {7, 23}, {8, 23}, {9, 23}, {10, 23}, {11, 23}, {12, 23}, {13, 23}, {14, 23}, {15, 23}, {16, 23}}
-
-Test Paths = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18, 22, 23}, {1, 17, 19, 22, 23}, {1, 17, 20, 22, 23}, {1, 17, 21, 22, 23}}
-
-### Part 1 - Step 4
-TR = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18}, {1, 17, 19}, {1, 17, 20}, {1, 17, 21}, {17, 18, 22}, {17, 19, 22}, {17, 20, 22}, {17, 21, 22}, {18, 22, 23}, {19, 22, 23}, {20, 22, 23}, {21, 22, 23}}
-
-Test Paths = {{1, 2, 23}, {1, 3, 23}, {1, 4, 23}, {1, 5, 23}, {1, 6, 23}, {1, 7, 23}, {1, 8, 23}, {1, 9, 23}, {1, 10, 23}, {1, 11, 23}, {1, 12, 23}, {1, 13, 23}, {1, 14, 23}, {1, 15, 23}, {1, 16, 23}, {1, 17, 18, 22, 23}, {1, 17, 19, 22, 23}, {1, 17, 20, 22, 23}, {1, 17, 21, 22, 23}}
-
-### Part 1 - Step 5
-![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/6df57e51-fa72-497e-aebd-5346bda8efbb)
-
-### Part 2 - Step 1
-``` kotlin
-override fun onTabChanged(tab: NavTab) {
-        if (tab == NavTab.EDITS) {
-            ImageRecommendationsEvent.logImpression("suggested_edit_dialog")
-            PatrollerExperienceEvent.logImpression("suggested_edits_dialog")
-        }
-        if (tab == NavTab.EXPLORE) {
-            binding.mainToolbarWordmark.visibility = View.VISIBLE
-            binding.mainToolbar.title = ""
-            controlNavTabInFragment = false
-        } else {
-            if (tab == NavTab.SEARCH && Prefs.showSearchTabTooltip) {
-                FeedbackUtil.showTooltip(this, fragment.binding.mainNavTabLayout.findViewById(NavTab.SEARCH.id), getString(R.string.search_tab_tooltip), aboveOrBelow = true, autoDismiss = false)
-                Prefs.showSearchTabTooltip = false
-            }
-            binding.mainToolbarWordmark.visibility = View.GONE
-            binding.mainToolbar.setTitle(tab.text)
-            controlNavTabInFragment = true
-        }
-        fragment.requestUpdateToolbarElevation()
-}
-```
-![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/762e827e-99a1-4ff8-b30f-2adffb1b85a5)
-
-### Part 2 - Step 2
-TR = {{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}}
-
-Test Paths = {{1, 2, 3, 4, 8}, {1, 3, 5, 6, 7, 8}}
-
-### Part 2 - Step 3
-TR = {{1, 2}, {1, 3}, {2, 3}, {3, 4}, {4, 8}, {3, 5}, {5, 6}, {5, 7}, {7, 8}}
-
-Test Paths = {{1, 2, 3, 4, 8}, {1, 3, 5, 6, 7, 8}, {1, 3, 5, 7, 8}}
-
-### Part 2 - Step 4
-TR = {{1, 2 ,3}, {1, 3, 4}, {1, 3 , 5}, {2, 3, 4}, {2, 3, 5}, {3, 4, 8}, {3, 5, 6}. {3, 5 ,7}, {5, 6, 7}, {5, 7, 8}, {6, 7, 8}}
-
-Test Paths = {{1, 2, 3, 4, 8}, {1, 3, 4, 8}, {1, 2, 3, 5, 6, 7, 8}, {1, 3, 5, 6, 7, 8}, {1, 3, 5, 7, 8}}
-
-### Part 2 - Step 5
-![image](https://github.com/SOEN345-WINTER2024/cfg-graph-lab-Ryan2Li/assets/99624359/61379d8d-415b-46b8-88c1-e9a2a48cf06f)
-
